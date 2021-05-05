@@ -1,0 +1,50 @@
+// css footer
+footer {
+    padding: 20px 0;
+    background: $black-cl;
+    color: #b0b0b0;
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        
+        .logoft {
+            position: absolute;
+            left: 50%;
+            top:50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+    .back {
+        text-transform: uppercase;
+        cursor: pointer;
+        color: #b0b0b0;
+    }
+    @include xs {
+        .container {
+            height: 100px;
+            flex-direction: column;
+           
+        }
+        
+    }
+}
+.totop {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    right: 40px;
+    bottom: 40px;
+    border-radius: 50%;
+    z-index: 200;
+    background: yellow;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    &.active {
+        opacity: 1;
+        pointer-events: auto;
+        transition: 0.3s;
+    }
+}

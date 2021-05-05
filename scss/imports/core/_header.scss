@@ -1,0 +1,222 @@
+// css header
+
+header {
+    --heightHeader: 80px;
+    width: 100%;
+    height: var(--heightHeader);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 400;
+    transition: 0.3s;
+    &.active {
+        background: #000;
+        transition: 0.3s;
+    };
+    .container-fluid {
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        .logo {
+            .hidden{
+                display: none;
+            }
+        }
+        .menu {
+            height: 100%;
+            display: flex;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            li {
+                height: 100%;
+                a{
+                    text-decoration: none;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 0 20px;
+                    position: relative;
+                    @include text(16px, pb, $lh-text, normal, uppercase);
+                    color: #fff;
+                    @include transition($t);
+                    &.active {
+                        color: $yellow-cl;
+                    }
+                    &:hover {
+                        opacity: 0.5;
+                        @include transition($t);
+                    }
+                    &:after{
+                        content: '';
+                        width: 100%;
+                        height: 2px;
+                        position: absolute;
+                        left: 0;
+                        bottom: 20px;
+                        background-color: $white-cl;
+                        @include transform(scaleX(0));
+                        @include transition($t);
+                    }
+                    &:hover {
+                        &:after{
+                            @include transform(scaleX(1));
+                            @include transition($t);
+                        }    
+                    }
+                }
+            }
+        }
+        .right {
+            display: inline-flex;
+            .lang {
+                position: relative;
+                @include text(16px, pb, $lh-text, normal, uppercase);
+                height: 100%;
+                @include mid(true);
+                &__current{
+                    display: inline-flex;
+                    color: $white-cl;
+                    cursor: pointer;
+                    i{
+                       @include mid(true);
+                        margin-left: 8px;
+                        img {
+                            width: 12px;
+                        }
+                    }
+                }
+                &__option {
+                    width: 50px;
+                    height: auto;
+                    padding: 10px;
+                    background: #fff;
+                    position: absolute;
+                    right: 0;
+                    top:30px;
+                    text-align:center;
+                    display: none;
+                    a {
+                        color: $text-cl;
+                        padding: 5px 0;
+                    }
+                }
+                &.active{
+                    .lang__option{
+                        display: block;
+                    }
+                }
+            }
+            .btnmenu {
+                display: none;
+                width: 40px;
+                height: 22px;
+                cursor: pointer;
+                margin-left: 20px;
+                position: relative;
+                z-index: 300;
+                span{
+                    width: 100%;
+                    height: 2px;
+                    display: block;
+                    background-color: #bea67c;
+                    position: absolute;
+                    top: 50%;
+                    @include transform(translateY(-50%));
+                    @include transition(0.3s);
+                }
+                &:before,&:after {
+                    content:'';
+                    width: 100%;
+                    height: 2px;
+                    display: block;
+                    background: #bea67c;
+                    @include transform(rotate(0deg));
+                    @include transition(transform 0.3s);
+                }
+                &:after {
+                    position: absolute;
+                    bottom: 0;
+                }
+                &.clicked{
+                    &:before {
+                        @include transform(rotate(45deg) translate(6px, 8px));
+                        @include transition(transform 0.3s);
+                    }
+                    span {
+                        opacity: 0;
+                        @include transition(0.3s);
+                    }
+                    &:after {
+                        @include transform(rotate(-45deg) translate(6px, -8px));
+                        @include transition(transform 0.3s);
+                    }
+                }
+            }
+        }  
+        
+    }
+    .nav{
+        width: 100%;
+        height: 100%;
+        background: $black-cl;
+        position: fixed;
+        top: 0;
+        left: 0;
+        @include transform(initial);
+        display: none;
+        z-index: 200;
+        opacity: 0;
+        // pointer-events: none;
+        @include transition(opacity 0.3s);
+        ul{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin-top: 90px;
+            li {
+                padding: 20px 0;
+                a {
+                    padding: 20px;
+                    color: $white-cl;
+                    text-align: center;
+                    text-transform: uppercase;
+                }
+            }
+        }
+        &.active {
+            opacity: 1;
+            pointer-events: auto;
+            @include transition(opacity 0.3s);
+        }
+        @include xs {
+            --heightHeader: 60px;
+            .nav {
+                display: block;
+            }
+        }
+    }
+    @include sm{
+        .container-fluid {
+            .menu {
+                display: none;
+            }
+            .right{
+                .btnmenu {
+                    display: block;
+                }
+            }
+           
+        }
+    }
+    @include xs {
+        --heightHeader: 60px;
+        .btnmenu {
+            display: block;
+        }
+    }
+}
